@@ -6,13 +6,16 @@ import LoginForm from './Components/LoginForm';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducers from './reducers';
+import LibraryList from './Components/LibraryList';
 
 
 
 class App extends Component {
-    state = {
-      loggedIn: null
-    };
+  state = {
+    loggedIn: null
+  };
+
+
 
   componentDidMount() {
     firebase.initializeApp({
@@ -33,23 +36,28 @@ class App extends Component {
     });
   }
   renderContent() {
+    const { headerStyle, spinnerStyle } = styles;
     switch (this.state.loggedIn) {
       case true:
       return (
-        <View>
-          <Button onUserPress={() => firebase.auth().signOut()}>
-            Log Out
-          </Button>
-          <Text> Your Plants </Text>
-      </View>
+        <Provider store={createStore(reducers)}>
+          <View>
+            <Button
+              onUserPress={() => firebase.auth().signOut()}>
+              Log Out
+            </Button>
+            <Text style={headerStyle}> Your Plants </Text>
+            <LibraryList />
+          </View>
+        </Provider>
       );
       case false:
       return <LoginForm />
       default:
       return (
-        <View style={styles.spinnerStyle}>
-        <Spinner
-        size="large" />
+        <View style={spinnerStyle}>
+          <Spinner
+            size="large" />
         </View>
       )
     }
@@ -57,12 +65,11 @@ class App extends Component {
 
   render() {
     return (
-      <Provider store={createStore(reducers)}>
-        <View>
-          <Header headerText="Plant App"/>
-          {this.renderContent()}
-        </View>
-      </Provider>
+      <View>
+        <Header headerText="Plant App"/>
+        {this.renderContent()}
+      </View>
+
     );
   }
 }
@@ -70,7 +77,14 @@ class App extends Component {
 const styles = {
   spinnerStyle: {
     marginTop: 300
-  }
+  },
+  headerStyle: {
+    fontSize: 25,
+    alignSelf: 'center'
+  },
+  // logOutStyle: {
+  //
+  // }
 }
 
 
