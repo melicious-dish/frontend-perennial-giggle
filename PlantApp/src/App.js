@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import firebase from 'firebase';
 import { Header, Button, Spinner } from './Components/common';
 import LoginForm from './Components/LoginForm';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import reducers from './reducers';
 
 
 
 class App extends Component {
-    state = { loggedIn: null };
+    state = {
+      loggedIn: null
+    };
 
   componentDidMount() {
     firebase.initializeApp({
@@ -31,9 +36,12 @@ class App extends Component {
     switch (this.state.loggedIn) {
       case true:
       return (
-        <Button onUserPress={() => firebase.auth().signOut()}>
-        Log Out
-        </Button>
+        <View>
+          <Button onUserPress={() => firebase.auth().signOut()}>
+            Log Out
+          </Button>
+          <Text> Your Plants </Text>
+      </View>
       );
       case false:
       return <LoginForm />
@@ -49,11 +57,13 @@ class App extends Component {
 
   render() {
     return (
-      <View>
-      <Header headerText="Sign In or Create Account"/>
-      {this.renderContent()}
-      </View>
-    )
+      <Provider store={createStore(reducers)}>
+        <View>
+          <Header headerText="Plant App"/>
+          {this.renderContent()}
+        </View>
+      </Provider>
+    );
   }
 }
 
