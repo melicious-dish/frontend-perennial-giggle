@@ -80,8 +80,11 @@ const styles = {
   },
   headerStyle: {
     fontSize: 25,
-    alignSelf: 'center'
-  },
+    alignSelf: 'center',
+    backgroundColor: '#A9DFBF',
+    borderRadius: 5,
+
+  }
   // logOutStyle: {
   //
   // }
