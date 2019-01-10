@@ -1,23 +1,33 @@
 import React, { Component } from 'react';
-import { Text, TouchableWithoutFeedback, View } from 'react-native';
+import {
+  Text,
+  TouchableWithoutFeedback,
+  View,
+  LayoutAnimation
+ } from 'react-native';
 import { connect } from 'react-redux';
 import { CardSection } from './common';
 import * as actions from '../actions';
 
 class ListItem extends Component {
+  componentDidUpdate() {
+    LayoutAnimation.spring();
+  }
+
+
   renderDescription() {
-    const { library, selectedLibraryId } = this.props;
+    const { library, expanded } = this.props;
     console.log('In render description');
     // console.log(library.id);
-    if (library.item.id === selectedLibraryId) {
+    if (expanded) {
       return (
-
-        <Text>
-          Species: {library.item.Species}
-          .
-          Genus: {library.item.Genus}
-        </Text>
-
+        <CardSection>
+          <Text style={{ flex: 1 }}>
+            Species: {library.item.Species}
+            .
+            Genus: {library.item.Genus}
+          </Text>
+        </CardSection>
       );
     }
   }
@@ -52,8 +62,13 @@ const styles = {
   }
 };
 
-const mapStateToProps = state => {
-  return { selectedLibraryId: state.selectedLibraryId };
+// ownProps is = this.state.props
+// take logic out of components and put here
+
+const mapStateToProps = (state, ownProps) => {
+  const expanded = state.selectedLibraryId === ownProps.library.item.id;
+
+  return { expanded };
 };
 
 // first () is to mapStateToProps

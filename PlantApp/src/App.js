@@ -35,6 +35,8 @@ class App extends Component {
       }
     });
   }
+
+  //Provider translates state in the store for React to use the Redux
   renderContent() {
     const { headerStyle, spinnerStyle } = styles;
     switch (this.state.loggedIn) {
@@ -47,7 +49,7 @@ class App extends Component {
               Log Out
             </Button>
             <Text style={headerStyle}> Your Plants </Text>
-            <LibraryList />
+            <LibraryList style={{ flex: 1 }}/>
           </View>
         </Provider>
       );
