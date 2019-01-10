@@ -6,3 +6,10 @@
   * Used Firebase for authenticaion -- straight forward
   * Styling:
       * Look at emotion
+
+ * Simplify my app. 
+   * work on front end: 
+     * adding a user 
+     * adding plants 
+     * adding tasks 
+     * adding photos
