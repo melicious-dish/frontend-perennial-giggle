@@ -62,9 +62,6 @@ class App extends Component {
 }
 
 const styles = {
-  spinnerStyle: {
-    marginTop: 300
-  },
   headerStyle: {
     marginTop: 20,
     fontSize: 25,
@@ -73,9 +70,7 @@ const styles = {
     borderRadius: 5,
 
   }
-  // logOutStyle: {
-  //
-  // }
+
 }
 
 

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { emailChanged, passwordChanged, loginUser } from '../actions'
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 // import firebase from 'firebase';
-import { Button, Card, CardSection, Input } from './common';
+import { Button, Card, CardSection, Input, Spinner } from './common';
 
 
 class LoginForm extends Component {
@@ -16,9 +16,33 @@ class LoginForm extends Component {
   }
 
   onButtonPress() {
-    console.log("IN botton press");
+    // console.log("IN botton press");
     const { email, password } = this.props;
     this.props.loginUser({ email, password });
+  }
+
+  renderButton() {
+    if (this.props.loading) {
+      return <Spinner size='large' />;
+    }
+
+    return (
+      <Button onUserPress={this.onButtonPress.bind(this)}>
+        Login
+      </Button>
+    );
+  }
+
+  renderError() {
+    if (this.props.error) {
+      return (
+        <View style={{ backgroundColor: 'white' }}>
+          <Text style={styles.errorTextStyle}>
+            {this.props.error}
+          </Text>
+        </View>
+      )
+    }
   }
 
   // onButtonPress() {
@@ -84,32 +108,31 @@ class LoginForm extends Component {
           />
         </CardSection>
 
+        <Text style={styles.errorTextStyle}>
+          {this.props.error}
+        </Text>
+
+
         <CardSection>
-          <Button onUserPress={this.onButtonPress.bind(this)}>
-            Log In
-          </Button>
+          {this.renderButton()}
         </CardSection>
 
       </Card>
     );
   }
 }
-
-// const styles = {
-//   errorTextStyle: {
-//     fontSize: 20,
-//     alignSelf: 'center',
-//     color: 'red'
-//   }
-// };
-
 //{use bind to use it in the future}
 
-const mapStateToProps = state => {
-  return {
-    email: state.auth.email,
-    password: state.auth.password
-  };
+const styles = {
+  errorTextStyle: {
+    fontSize: 20,
+    alignSelf: 'center',
+    color: 'red'
+  }
+}
+const mapStateToProps = ({ auth }) => {
+  const { email, password, error, loading } = auth
+  return { email, password, error, loading };
 };
 
 export default connect(mapStateToProps, {
