@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
 import LibraryList from './Components/LibraryList';
+import Router from './Router';
 
 
 
@@ -41,21 +42,22 @@ class App extends Component {
   //         </View>
   //       </Provider>
   // }
+  // <View>
+  //   <Router />
+  //   <Button
+  //     onUserPress={() => firebase.auth().signOut()}>
+  //     Log Out
+  //   </Button>
+  //   <Text style={headerStyle}> Your Plants </Text>
+  //   <LibraryList style={{ flex: 1 }}/>
+  // </View>
 
   render() {
     const { headerStyle } = styles;
     const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
     return (
       <Provider store={store}>
-        <View>
-          <LoginForm />
-          <Button
-            onUserPress={() => firebase.auth().signOut()}>
-            Log Out
-          </Button>
-          <Text style={headerStyle}> Your Plants </Text>
-          <LibraryList style={{ flex: 1 }}/>
-        </View>
+        <Router />
       </Provider>
     );
   }
