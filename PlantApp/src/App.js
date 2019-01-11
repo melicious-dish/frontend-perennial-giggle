@@ -1,77 +1,62 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import firebase from 'firebase';
-import { Header, Button, Spinner } from './Components/common';
+import ReduxThunk from 'redux-thunk';
+import { Button } from './Components/common';
 import LoginForm from './Components/LoginForm';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
 import LibraryList from './Components/LibraryList';
 
 
 
 class App extends Component {
-  state = {
-    loggedIn: null
-  };
-
-
-
   componentDidMount() {
-    firebase.initializeApp({
+    const config = {
       apiKey: "AIzaSyCFT7sYB65HbuFRuyFz9mmloonV4XHwKf8",
       authDomain: "plant-app-e071e.firebaseapp.com",
       databaseURL: "https://plant-app-e071e.firebaseio.com",
       projectId: "plant-app-e071e",
       storageBucket: "plant-app-e071e.appspot.com",
       messagingSenderId: "571242942058"
-    });
+    };
 
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({ loggedIn: true });
-      } else {
-        this.setState({ loggedIn: false });
-      }
-    });
+    firebase.initializeApp(config);
   }
-
   //Provider translates state in the store for React to use the Redux
-  renderContent() {
-    const { headerStyle, spinnerStyle } = styles;
-    switch (this.state.loggedIn) {
-      case true:
-      return (
-        <Provider store={createStore(reducers)}>
-          <View>
-            <Button
-              onUserPress={() => firebase.auth().signOut()}>
-              Log Out
-            </Button>
-            <Text style={headerStyle}> Your Plants </Text>
-            <LibraryList style={{ flex: 1 }}/>
-          </View>
-        </Provider>
-      );
-      case false:
-      return <LoginForm />
-      default:
-      return (
-        <View style={spinnerStyle}>
-          <Spinner
-            size="large" />
-        </View>
-      )
-    }
-  }
+  // connects all the connect tags
+
+  // renderContent() {
+  //   const { headerStyle } = styles;
+  //       <Provider store={createStore(reducers)}>
+  //         <View>
+  //           <LoginForm />
+  //           <Button
+  //             onUserPress={() => firebase.auth().signOut()}>
+  //             Log Out
+  //           </Button>
+  //           <Text style={headerStyle}> Your Plants </Text>
+  //           <LibraryList style={{ flex: 1 }}/>
+  //         </View>
+  //       </Provider>
+  // }
 
   render() {
+    const { headerStyle } = styles;
+    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
     return (
-      <View>
-        <Header headerText="Plant App"/>
-        {this.renderContent()}
-      </View>
-
+      <Provider store={store}>
+        <View>
+          <LoginForm />
+          <Button
+            onUserPress={() => firebase.auth().signOut()}>
+            Log Out
+          </Button>
+          <Text style={headerStyle}> Your Plants </Text>
+          <LibraryList style={{ flex: 1 }}/>
+        </View>
+      </Provider>
     );
   }
 }
@@ -81,6 +66,7 @@ const styles = {
     marginTop: 300
   },
   headerStyle: {
+    marginTop: 20,
     fontSize: 25,
     alignSelf: 'center',
     backgroundColor: '#A9DFBF',

@@ -1,49 +1,65 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { emailChanged, passwordChanged, loginUser } from '../actions'
 import { Text } from 'react-native';
-import firebase from 'firebase';
-import { Button, Card, CardSection, Input, Spinner } from './common';
+// import firebase from 'firebase';
+import { Button, Card, CardSection, Input } from './common';
 
 
 class LoginForm extends Component {
-  state = { email: '', password: '', error: '', loading: false };
+  onEmailChange(text) {
+    this.props.emailChanged(text);
+  }
+// call to the action creator
+  onPasswordChange(text) {
+    this.props.passwordChanged(text);
+  }
 
   onButtonPress() {
-    const { email, password } = this.state;
-
-    this.setState({ error: '', loading: true });
-
-    firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(this.onLoginSuccess.bind(this))
-      .catch(() => {
-        firebase.auth().createUserWithEmailAndPassword(email, password)
-          .then(this.onLoginSuccess.bind(this))
-          .catch(this.onLoginFail.bind(this));
-      });
+    console.log("IN botton press");
+    const { email, password } = this.props;
+    this.props.loginUser({ email, password });
   }
 
-  onLoginFail() {
-    this.setState({ error: 'Invalid email or password', loading: false });
-  }
+  // onButtonPress() {
+  //   const { email, password } = this.state;
 
-  onLoginSuccess() {
-    this.setState({
-      email: '',
-      password: '',
-      loading: false,
-      error: ''
-    });
-  }
+    // this.setState({ error: '', loading: true });
+    //
+    // firebase.auth().signInWithEmailAndPassword(email, password)
+    //   .then(this.onLoginSuccess.bind(this))
+    //   .catch(() => {
+    //     firebase.auth().createUserWithEmailAndPassword(email, password)
+    //       .then(this.onLoginSuccess.bind(this))
+    //       .catch(this.onLoginFail.bind(this));
+      // });
+  // }
 
-  renderButton() {
-    if (this.state.loading) {
-      return <Spinner size="small"/>
-    }
-    return (
-      <Button onUserPress={this.onButtonPress.bind(this)}>
-        Log In
-      </Button>
-    );
-  }
+  // onLoginFail() {
+  //   this.setState({ error: 'Invalid email or password', loading: false });
+  // }
+  //
+  // onLoginSuccess() {
+  //   this.setState({
+  //     email: '',
+  //     password: '',
+  //     loading: false,
+  //     error: ''
+  //   });
+  // }
+
+  // renderButton() {
+  //   if (this.state.loading) {
+  //     return <Spinner size="small"/>
+  //   }
+  //   return (
+  //     <Button onUserPress={this.onButtonPress.bind(this)}>
+  //       Log In
+  //     </Button>
+  //   );
+  // }
+
+
 
   render() {
 
@@ -53,8 +69,8 @@ class LoginForm extends Component {
           <Input
             placeholder="user@gmail.com"
             label="Email"
-            value={this.state.email}
-            onChangeText={email => this.setState({ email })}
+            onChangeText={this.onEmailChange.bind(this)}
+            value={this.props.email}
             />
         </CardSection>
 
@@ -63,17 +79,15 @@ class LoginForm extends Component {
             secureTextEntry
             placeholder="password"
             label="Password"
-            value={this.state.password}
-            onChangeText={password => this.setState({ password })}
+            onChangeText={this.onPasswordChange.bind(this)}
+            value={this.props.password}
           />
         </CardSection>
 
-        <Text style={styles.errorTextStyle}>
-          {this.state.error}
-        </Text>
-
         <CardSection>
-          {this.renderButton()}
+          <Button onUserPress={this.onButtonPress.bind(this)}>
+            Log In
+          </Button>
         </CardSection>
 
       </Card>
@@ -81,14 +95,23 @@ class LoginForm extends Component {
   }
 }
 
-const styles = {
-  errorTextStyle: {
-    fontSize: 20,
-    alignSelf: 'center',
-    color: 'red'
-  }
-};
+// const styles = {
+//   errorTextStyle: {
+//     fontSize: 20,
+//     alignSelf: 'center',
+//     color: 'red'
+//   }
+// };
 
 //{use bind to use it in the future}
 
-export default LoginForm;
+const mapStateToProps = state => {
+  return {
+    email: state.auth.email,
+    password: state.auth.password
+  };
+};
+
+export default connect(mapStateToProps, {
+  emailChanged, passwordChanged, loginUser
+})(LoginForm);
