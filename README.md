@@ -15,3 +15,4 @@
      * adding photos
 
 * Used Thunk for asynchronous action creators (firebase, ajax, etc)
+* Use React Native Router (react-native-router-flux) for navigation
