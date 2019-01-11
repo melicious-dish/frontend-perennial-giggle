@@ -13,3 +13,5 @@
      * adding plants 
      * adding tasks 
      * adding photos
+
+* Used Thunk for asynchronous action creators (firebase, ajax, etc)
