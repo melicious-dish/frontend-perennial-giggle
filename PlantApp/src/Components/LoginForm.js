@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { emailChanged, passwordChanged, loginUser } from '../actions'
+import { emailChanged, passwordChanged, loginUser, logoutUser } from '../actions'
 import { Text, View } from 'react-native';
 // import firebase from 'firebase';
 import { Button, Card, CardSection, Input, Spinner } from './common';
@@ -112,7 +112,6 @@ class LoginForm extends Component {
           {this.props.error}
         </Text>
 
-
         <CardSection>
           {this.renderButton()}
         </CardSection>
@@ -136,5 +135,5 @@ const mapStateToProps = ({ auth }) => {
 };
 
 export default connect(mapStateToProps, {
-  emailChanged, passwordChanged, loginUser
+  emailChanged, passwordChanged, loginUser, logoutUser
 })(LoginForm);

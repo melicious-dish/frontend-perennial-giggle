@@ -3,7 +3,8 @@ import {
   PASSWORD_CHANGED,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
-  LOGIN_USER
+  LOGIN_USER,
+  // LOGOUT_USER
  } from '../actions/types';
 
 // can never return undefined from a reducer, need a default state
