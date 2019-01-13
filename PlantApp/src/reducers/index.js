@@ -5,6 +5,7 @@ import { combineReducers } from 'redux';
 import LibraryReducer from './LibraryReducer';
 import SelectionReducer from './SelectionReducer';
 import AuthReducer from './AuthReducer';
+import PlantFormReducer from './PlantFormReducer';
 
 
 //produce the initial state of the app
@@ -16,5 +17,6 @@ import AuthReducer from './AuthReducer';
 export default combineReducers({
   libraries: LibraryReducer,
   selectedLibraryId: SelectionReducer,
-  auth: AuthReducer
+  auth: AuthReducer,
+  plantForm: PlantFormReducer,
 });
