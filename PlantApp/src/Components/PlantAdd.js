@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Picker, Text } from 'react-native';
-import { Card, CardSection, Input, Button } from './common';
 import { connect } from 'react-redux';
-import { addPlant }from '../actions';
+import { addPlant, plantCreate } from '../actions';
+import { Card, CardSection, Input, Button } from './common';
 
 // import { Image } from 'react-native';
 // import { PhotoUpload } from 'react-native-photo-upload';
@@ -12,6 +12,12 @@ import { addPlant }from '../actions';
 
 
 class PlantCreate extends Component {
+onButtonPress() {
+  const { genusSpecies, commonName, nickname, task, photo } = this.props;
+
+  this.props.plantCreate({ genusSpecies, commonName, nickname, task: task || 'Water', photo });
+}
+
   render() {
     return (
       <Card>
@@ -47,7 +53,7 @@ class PlantCreate extends Component {
           <Picker
             selectedValue={this.props.shift}
             style={{ flex:1 }}
-            onValueChange={value => this.props.addPlant({ prop: 'shift', value })}
+            onValueChange={value => this.props.addPlant({ prop: 'task', value })}
             >
             <Picker.Item label='Water' value='Water' />
             <Picker.Item label='Repot' value='Repot' />
@@ -59,13 +65,13 @@ class PlantCreate extends Component {
         </CardSection>
 
         <CardSection>
-          <Button>
+          <Button >
           Add Photo
           </Button>
         </CardSection>
 
         <CardSection>
-          <Button>
+          <Button onUserPress={this.onButtonPress.bind(this)}>
           Create
           </Button>
         </CardSection>
@@ -83,9 +89,11 @@ const styles = {
   }
 }
 const mapStateToProps = (state) => {
-  const { genusSpecies, commonName, nickname, photo } = state.plantForm;
+  const { genusSpecies, commonName, nickname, task, photo } = state.plantForm;
 
-  return { genusSpecies, commonName, nickname, photo };
+  return { genusSpecies, commonName, nickname, task, photo };
 }
 
-export default connect(mapStateToProps, {addPlant}) (PlantCreate);
+export default connect(mapStateToProps, {
+  addPlant, plantCreate
+}) (PlantCreate);

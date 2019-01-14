@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   genusSpecies: '',
   commonName: '',
   nickname: '',
+  task: '',
   photo: ''
 };
 
