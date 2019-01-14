@@ -5,4 +5,5 @@ export const LOGIN_USER_SUCCESS = 'login_user_success';
 export const LOGIN_USER_FAIL = 'login_user_fail';
 export const LOGIN_USER = 'login_user';
 export const ADD_PLANT = 'add_plant';
+export const PLANT_CREATE = 'plant_create';
 // export const LOGOUT_USER = 'logout_user';
