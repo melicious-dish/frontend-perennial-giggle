@@ -7,7 +7,7 @@ import LoginForm from './Components/LoginForm';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
-import LibraryList from './Components/LibraryList';
+// import PlantList from './Components/PlantList';
 import Router from './Router';
 
 

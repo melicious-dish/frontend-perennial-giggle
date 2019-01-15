@@ -4,7 +4,8 @@ import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import {
   ADD_PLANT,
-  PLANT_CREATE
+  PLANT_CREATE,
+  PLANTS_FETCH_SUCCESS
 } from './types';
 
 export const addPlant = ({ prop, value }) => {
@@ -31,5 +32,20 @@ export const plantCreate = ({ genusSpecies, commonName, nickname, task, photo })
       dispatch({ type: PLANT_CREATE });
       Actions.pop();
     });
+  };
+};
+
+
+//fetch data
+// snapshot is an object that describes the data, call snapshot.val to get the list of actual data
+export const plantsFetch = () => {
+  const { currentUser } = firebase.auth();
+
+  return (dispatch) => {
+    console.log("in PLANTS FETCH");
+    firebase.database().ref(`/users/${currentUser.uid}/plants`)
+      .on('value', snapshot => {
+        dispatch({ type: PLANTS_FETCH_SUCCESS, payload: snapshot.val() });
+      })
   };
 };

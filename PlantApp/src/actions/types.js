@@ -6,4 +6,5 @@ export const LOGIN_USER_FAIL = 'login_user_fail';
 export const LOGIN_USER = 'login_user';
 export const ADD_PLANT = 'add_plant';
 export const PLANT_CREATE = 'plant_create';
+export const PLANTS_FETCH_SUCCESS = 'plants_fetch_success';
 // export const LOGOUT_USER = 'logout_user';

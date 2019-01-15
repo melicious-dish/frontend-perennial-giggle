@@ -1,7 +1,7 @@
 import React from 'react';
 import { Scene, Router, Actions } from 'react-native-router-flux';
 import LoginForm from './Components/LoginForm';
-import LibraryList from './Components/LibraryList';
+import PlantList from './Components/PlantList';
 import PlantCreate from './Components/PlantAdd';
 
 const RouterComponent = () => {
@@ -15,13 +15,13 @@ const RouterComponent = () => {
           initial
           />
         </Scene>
-        
+
         <Scene key='main'>
           <Scene
           rightTitle='Add a plant'
           onRight={() => Actions.plantCreate()}
           key='plantList'
-          component={LibraryList}
+          component={PlantList}
           title='Your Plants'
           initial
           />

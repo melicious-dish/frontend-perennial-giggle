@@ -6,6 +6,7 @@ import LibraryReducer from './LibraryReducer';
 import SelectionReducer from './SelectionReducer';
 import AuthReducer from './AuthReducer';
 import PlantFormReducer from './PlantFormReducer';
+import PlantReducer from './PlantReducer';
 
 
 //produce the initial state of the app
@@ -19,4 +20,5 @@ export default combineReducers({
   selectedLibraryId: SelectionReducer,
   auth: AuthReducer,
   plantForm: PlantFormReducer,
+  plants: PlantReducer
 });
