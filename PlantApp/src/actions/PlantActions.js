@@ -5,7 +5,8 @@ import { Actions } from 'react-native-router-flux';
 import {
   ADD_PLANT,
   PLANT_CREATE,
-  PLANTS_FETCH_SUCCESS
+  PLANTS_FETCH_SUCCESS,
+  PLANT_SAVE_SUCCESS
 } from './types';
 
 export const addPlant = ({ prop, value }) => {
@@ -44,8 +45,21 @@ export const plantsFetch = () => {
   return (dispatch) => {
     // console.log("in PLANTS FETCH");
     firebase.database().ref(`/users/${currentUser.uid}/plants`)
-      .on('value', snapshot => {
-        dispatch({ type: PLANTS_FETCH_SUCCESS, payload: snapshot.val() });
-      })
+    .on('value', snapshot => {
+      dispatch({ type: PLANTS_FETCH_SUCCESS, payload: snapshot.val() });
+    })
+  };
+};
+
+export const plantSave = ({ genusSpecies, commonName, nickname, task, photo, uid }) => {
+  const { currentUser } = firebase.auth();
+
+  return (dispatch) => {
+    firebase.database().ref(`/users/${currentUser.uid}/plants/${uid}`)
+    .set({ genusSpecies, commonName, nickname, task, photo })
+    .then(() => {
+      dispatch({ type: PLANT_SAVE_SUCCESS });
+      Actions.plantList({ type: 'reset' });
+    });
   };
 };

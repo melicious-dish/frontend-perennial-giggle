@@ -9,7 +9,8 @@ module.exports = function (api) {
         ["@babel/plugin-proposal-class-properties", { "loose" : true }],
         "@babel/plugin-transform-regenerator",
         "@babel/plugin-transform-async-to-generator",
-        "@babel/plugin-transform-runtime"
+        "@babel/plugin-transform-runtime",
+        "babel-plugin-styled-components"
     ];
 
     return {
