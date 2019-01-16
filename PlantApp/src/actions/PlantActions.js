@@ -42,7 +42,7 @@ export const plantsFetch = () => {
   const { currentUser } = firebase.auth();
 
   return (dispatch) => {
-    console.log("in PLANTS FETCH");
+    // console.log("in PLANTS FETCH");
     firebase.database().ref(`/users/${currentUser.uid}/plants`)
       .on('value', snapshot => {
         dispatch({ type: PLANTS_FETCH_SUCCESS, payload: snapshot.val() });

@@ -22,7 +22,7 @@ class PlantList extends Component {
   }
 
 render() {
-  console.log(this.props);
+  // console.log(this.props);
     return (
         <FlatList
           data={this.props.plants}
@@ -32,6 +32,7 @@ render() {
       );
   }
 }
+// use for converting an object to array. the val is the plant property (all the data in the plant object), the uid is the key.
 const mapStateToProps = state => {
   const plants = _.map(state.plants, (val, uid) => {
     return { ...val, uid };
