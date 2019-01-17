@@ -2,17 +2,20 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PlantForm from './PlantForm';
-import { addPlant, plantSave, plantDelete } from '../actions';
+import { addPlant, plantSave, plantDelete, plantClear } from '../actions';
 import { Card, CardSection, Button, Confirm } from './common';
 
 class PlantEdit extends Component {
   state = { showModal: false}
 
   componentDidMount() {
+
     _.each(this.props.plant, (value, prop) => {
       this.props.addPlant({ prop, value });
+
     });
   }
+
 
   onButtonPress() {
     const { genusSpecies, commonName, nickname, task, photo, } = this.props;
@@ -29,11 +32,6 @@ class PlantEdit extends Component {
 // use plant.uid to specificy which plant. this comes from PlantListItem.js onRowPress() {
   //Actions.plantEdit( { plant: this.props.plant });
 
-    this.props.plantDelete({ genusSpecies, commonName, nickname, task, photo, uid: this.props.plant.uid });
-    // const { uid } = this.props.plant;
-
-  
-    // this.this.props.plantDelete({ uid });
     this.props.plantDelete({ genusSpecies, commonName, nickname, task, photo, uid: this.props.plant.uid });
   }
 
@@ -78,5 +76,5 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-  addPlant, plantSave, plantDelete
+  addPlant, plantSave, plantDelete, plantClear
 } )(PlantEdit);

@@ -6,7 +6,8 @@ import {
   ADD_PLANT,
   PLANT_CREATE,
   PLANTS_FETCH_SUCCESS,
-  PLANT_SAVE_SUCCESS
+  PLANT_SAVE_SUCCESS,
+  PLANT_CLEAR_SUCCESS
 } from './types';
 
 export const addPlant = ({ prop, value }) => {
@@ -78,5 +79,9 @@ export const plantDelete = ({ uid }) => {
   };
 };
 
+
+export const plantClear = () => {
+    return ({ type: PLANT_CLEAR_SUCCESS });
+};
 
 //then hook action creator up to plantedit Component

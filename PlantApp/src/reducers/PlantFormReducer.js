@@ -1,7 +1,8 @@
 import {
   ADD_PLANT,
   PLANT_CREATE,
-  PLANT_SAVE_SUCCESS
+  PLANT_SAVE_SUCCESS,
+  PLANT_CLEAR_SUCCESS
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -20,7 +21,10 @@ export default (state = INITIAL_STATE, action) => {
       return INITIAL_STATE;
     case PLANT_SAVE_SUCCESS:
       return INITIAL_STATE;
+    case PLANT_CLEAR_SUCCESS:
+      return INITIAL_STATE;
     default:
       return state;
+
   }
 };
