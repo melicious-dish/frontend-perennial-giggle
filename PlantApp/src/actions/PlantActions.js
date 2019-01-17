@@ -63,3 +63,20 @@ export const plantSave = ({ genusSpecies, commonName, nickname, task, photo, uid
     });
   };
 };
+
+export const plantDelete = ({ uid }) => {
+  const { currentUser } = firebase.auth();
+
+  return () => {
+      console.log("in plant delete");
+    firebase.database().ref(`/users/${currentUser.uid}/plants/${uid}`)
+
+    .remove()
+    .then(() => {
+      Actions.plantList({ type: 'reset'});
+    });
+  };
+};
+
+
+//then hook action creator up to plantedit Component
