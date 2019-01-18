@@ -5,7 +5,7 @@ import ReduxThunk from 'redux-thunk';
 import { Button } from './Components/common';
 import LoginForm from './Components/LoginForm';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import reducers from './reducers';
 // import PlantList from './Components/PlantList';
 import Router from './Router';
@@ -13,7 +13,7 @@ import Router from './Router';
 
 
 class App extends Component {
-  componentDidMount() {
+  async UNSAFE_componentWillMount() {
     const config = {
       apiKey: "AIzaSyCFT7sYB65HbuFRuyFz9mmloonV4XHwKf8",
       authDomain: "plant-app-e071e.firebaseapp.com",
@@ -23,7 +23,7 @@ class App extends Component {
       messagingSenderId: "571242942058"
     };
 
-    firebase.initializeApp(config);
+    await firebase.initializeApp(config);
   }
   //Provider translates state in the store for React to use the Redux
   // connects all the connect tags
@@ -54,7 +54,10 @@ class App extends Component {
 
   render() {
     const { headerStyle } = styles;
-    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+
+    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+    const store = createStore(reducers, {}, composeEnhancers(applyMiddleware(ReduxThunk)));
     return (
       <Provider store={store}>
         <Router />

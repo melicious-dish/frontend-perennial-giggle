@@ -22,14 +22,14 @@ export const addPlant = ({ prop, value }) => {
 // use firebase.auth to get uid
 // add new data to firebase store w .push
 // use .then to navigate back to plant list
-// dispatch to type: ADD_PLANT to reset the form to empty and add that to tyles and reducer to return to initial state
+// dispatch to type: ADD_PLANT to reset the form to empty and add that to types and reducer to return to initial state
 
-export const plantCreate = ({ genusSpecies, commonName, nickname, task, photo }) => {
+export const plantCreate = ({ genusSpecies, commonName, nickname, taskType, taskFrequency, taskInterval, photo }) => {
   const { currentUser } = firebase.auth();
 
   return (dispatch) => {
     firebase.database().ref(`/users/${currentUser.uid}/plants`)
-    .push({ genusSpecies, commonName, nickname, task, photo })
+    .push({ genusSpecies, commonName, nickname, taskType, taskFrequency, taskInterval, photo })
     .then(() => {
       dispatch({ type: PLANT_CREATE });
       Actions.pop();
@@ -52,12 +52,12 @@ export const plantsFetch = () => {
   };
 };
 
-export const plantSave = ({ genusSpecies, commonName, nickname, task, photo, uid }) => {
+export const plantSave = ({ genusSpecies, commonName, nickname, taskType, taskFrequency, taskInterval, photo, uid }) => {
   const { currentUser } = firebase.auth();
 
   return (dispatch) => {
     firebase.database().ref(`/users/${currentUser.uid}/plants/${uid}`)
-    .set({ genusSpecies, commonName, nickname, task, photo })
+    .set({ genusSpecies, commonName, nickname, taskType, taskFrequency, taskInterval, photo })
     .then(() => {
       dispatch({ type: PLANT_SAVE_SUCCESS });
       Actions.plantList({ type: 'reset' });

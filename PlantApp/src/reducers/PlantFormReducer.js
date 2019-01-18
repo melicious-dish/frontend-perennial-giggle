@@ -9,14 +9,16 @@ const INITIAL_STATE = {
   genusSpecies: '',
   commonName: '',
   nickname: '',
-  task: '',
-  photo: ''
+  taskType: 'water',
+  taskFrequency: '1',
+  taskInterval: 'day',
+  photo: '',
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADD_PLANT:
-      return { ...state, [action.payload.prop]: action.payload.value };
+      return { ...state, [action.payload.prop]: action.payload.value};
     case PLANT_CREATE:
       return INITIAL_STATE;
     case PLANT_SAVE_SUCCESS:

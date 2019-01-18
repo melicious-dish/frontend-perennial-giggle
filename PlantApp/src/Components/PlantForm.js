@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { addPlant } from '../actions';
 import { CardSection, Input, Button } from './common';
 
-
 class PlantForm extends Component {
   render() {
     return (
@@ -36,19 +35,50 @@ class PlantForm extends Component {
           />
         </CardSection>
 
+        <CardSection>
+          <Input
+          editable={false}
+          label='Tasks'
+          value={`${this.props.taskType} ${this.props.taskFrequency} ${this.props.taskInterval}`}
+          />
+        </CardSection>
+
         <CardSection style={{ flexDirection: 'row' }}>
           <Text style={styles.pickerLabelStyle}>Add A Task</Text>
           <Picker
-            selectedValue={this.props.shift}
+            selectedValue={this.props.taskType}
             style={{ flex:1 }}
-            onValueChange={value => this.props.addPlant({ prop: 'task', value })}
+            onValueChange={value => this.props.addPlant({ prop: 'taskType', value })}
             >
-            <Picker.Item label='Water' value='Water' />
-            <Picker.Item label='Repot' value='Repot' />
-            <Picker.Item label='Fertilize' value='Fertilize' />
-            <Picker.Item label='Prune' value='Prune' />
-            <Picker.Item label='Harvest' value='Harvest' />
-            <Picker.Item label='Sow' value='Sow' />
+            <Picker.Item label='Water' value='water' />
+            <Picker.Item label='Repot' value='repot' />
+            <Picker.Item label='Fertilize' value='fertilize' />
+            <Picker.Item label='Prune' value='prune' />
+            <Picker.Item label='Harvest' value='harvest' />
+            <Picker.Item label='Sow' value='sow' />
+          </Picker>
+          <Picker
+            selectedValue={this.props.taskFrequency}
+            style={{ flex:1 }}
+            onValueChange={value => this.props.addPlant({ prop: 'taskFrequency', value })}
+          // {  itemStyle={{ backgroundColor: "grey", color: "blue", fontFamily:"Helvetica", fontSize:17}}}
+            >
+            <Picker.Item label='1 x per' value='1' />
+            <Picker.Item label='2 x per' value='2' />
+            <Picker.Item label='3 x per' value='3' />
+            <Picker.Item label='4 x per' value='4' />
+            <Picker.Item label='5 x per' value='5' />
+            <Picker.Item label='6 x per' value='6' />
+          </Picker>
+          <Picker
+            selectedValue={this.props.taskInterval}
+            style={{ flex:1 }}
+          onValueChange={value => this.props.addPlant({ prop: 'taskInterval', value })}
+            >
+            <Picker.Item label='Day' value='day' />
+            <Picker.Item label='Week' value='week' />
+            <Picker.Item label='Month' value='month' />
+            <Picker.Item label='Year' value='year' />
           </Picker>
         </CardSection>
 
@@ -70,9 +100,9 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  const { genusSpecies, commonName, nickname } = state.plantForm;
+  const { genusSpecies, commonName, nickname, taskType, taskFrequency, taskInterval} = state.plantForm;
 
-  return { genusSpecies, commonName, nickname };
+  return { genusSpecies, commonName, nickname, taskType, taskFrequency, taskInterval};
 };
 
 export default connect(mapStateToProps, { addPlant})(PlantForm);

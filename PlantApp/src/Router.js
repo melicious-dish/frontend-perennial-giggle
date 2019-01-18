@@ -1,5 +1,7 @@
 import React from 'react';
 import { Scene, Router, Actions } from 'react-native-router-flux';
+import firebase from 'firebase';
+import { Spinner } from './Components/common'
 import LoginForm from './Components/LoginForm';
 import PlantList from './Components/PlantList';
 import PlantCreate from './Components/PlantAdd';
@@ -39,7 +41,7 @@ const RouterComponent = () => {
         </Scene>
       </Scene>
     </Router>
-  );
+  )
 };
 
 export default RouterComponent;

@@ -15,9 +15,9 @@ import PlantForm from './PlantForm';
 
 class PlantCreate extends Component {
   onButtonPress() {
-    const { genusSpecies, commonName, nickname, task, photo } = this.props;
+    const { genusSpecies, commonName, nickname, taskType, taskFrequency, taskInterval, photo } = this.props;
 
-    this.props.plantCreate({ genusSpecies, commonName, nickname, task: task || 'Water', photo });
+    this.props.plantCreate({ genusSpecies, commonName, nickname, taskType, taskFrequency, taskInterval, photo });
   }
 
   render() {
@@ -38,9 +38,9 @@ class PlantCreate extends Component {
 
 
 const mapStateToProps = (state) => {
-  const { genusSpecies, commonName, nickname, task, photo } = state.plantForm;
+  const { genusSpecies, commonName, nickname, taskType, taskFrequency, taskInterval, photo } = state.plantForm;
 
-  return { genusSpecies, commonName, nickname, task, photo };
+  return { genusSpecies, commonName, nickname, taskType, taskFrequency, taskInterval, photo };
 }
 
 export default connect(mapStateToProps, {

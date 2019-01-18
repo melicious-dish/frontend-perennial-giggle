@@ -9,30 +9,28 @@ class PlantEdit extends Component {
   state = { showModal: false}
 
   componentDidMount() {
-
     _.each(this.props.plant, (value, prop) => {
       this.props.addPlant({ prop, value });
-
     });
   }
 
 
   onButtonPress() {
-    const { genusSpecies, commonName, nickname, task, photo, } = this.props;
+    const { genusSpecies, commonName, nickname, taskType, taskFrequency, taskInterval, photo, plant: { uid }} = this.props;
 
 // use plant.uid to specificy which plant. this comes from PlantListItem.js onRowPress() {
   //Actions.plantEdit( { plant: this.props.plant });
 
-    this.props.plantSave({ genusSpecies, commonName, nickname, task, photo, uid: this.props.plant.uid });
+    this.props.plantSave({ genusSpecies, commonName, nickname, taskType, taskFrequency, taskInterval, photo, uid });
   }
 
   onAccept() {
-    const { genusSpecies, commonName, nickname, task, photo, } = this.props;
+    const { plant: { uid } } = this.props;
 
 // use plant.uid to specificy which plant. this comes from PlantListItem.js onRowPress() {
   //Actions.plantEdit( { plant: this.props.plant });
 
-    this.props.plantDelete({ genusSpecies, commonName, nickname, task, photo, uid: this.props.plant.uid });
+    this.props.plantDelete({ uid });
   }
 
   onDecline() {
@@ -70,9 +68,9 @@ class PlantEdit extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { genusSpecies, commonName, nickname, task, photo } = state.plantForm;
+  const { genusSpecies, commonName, nickname, taskType, taskFrequency, taskInterval, photo } = state.plantForm;
 
-  return { genusSpecies, commonName, nickname, task, photo };
+  return { genusSpecies, commonName, nickname, taskType, taskFrequency, taskInterval, photo };
 }
 
 export default connect(mapStateToProps, {

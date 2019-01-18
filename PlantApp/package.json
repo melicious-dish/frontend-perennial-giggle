@@ -9,6 +9,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
     "@babel/runtime": "^7.2.0",
+    "@ffmpeg-installer/ffmpeg": "^1.0.17",
     "firebase": "^5.7.2",
     "lodash": "^4.17.11",
     "react": "16.6.3",

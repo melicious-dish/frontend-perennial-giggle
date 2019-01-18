@@ -27,7 +27,7 @@ render() {
         <FlatList
           data={this.props.plants}
           renderItem={this.renderItem}
-          keyExtractor={(item, index) => index.toString}
+          keyExtractor={(item) => item.uid }
           />
       );
   }
