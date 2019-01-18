@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
 import { connect } from 'react-redux';
-import { addPlant, plantCreate } from '../actions';
+import { addPlant, plantCreate, plantClear } from '../actions';
 import { Card, CardSection, Button } from './common';
 import PlantForm from './PlantForm';
 
@@ -14,6 +14,10 @@ import PlantForm from './PlantForm';
 
 
 class PlantCreate extends Component {
+  componentDidMount() {
+    this.props.plantClear();
+}
+
   onButtonPress() {
     const { genusSpecies, commonName, nickname, taskType, taskFrequency, taskInterval, photo } = this.props;
 
@@ -44,5 +48,5 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-  addPlant, plantCreate
+  addPlant, plantCreate, plantClear
 }) (PlantCreate);
