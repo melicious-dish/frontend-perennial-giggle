@@ -2,8 +2,6 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import { connect } from 'react-redux';
-// import ListItem from './ListItem';
-//import { List, ListItem } from 'react-native-elements';
 import { plantsFetch } from '../actions';
 import PlantListItem from './PlantListItem'
 

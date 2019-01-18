@@ -7,7 +7,8 @@ import {
   PLANT_CREATE,
   PLANTS_FETCH_SUCCESS,
   PLANT_SAVE_SUCCESS,
-  PLANT_CLEAR_SUCCESS
+  PLANT_CLEAR_SUCCESS,
+  PLANTS_PHOTOS
 } from './types';
 
 export const addPlant = ({ prop, value }) => {
@@ -36,6 +37,8 @@ export const plantCreate = ({ genusSpecies, commonName, nickname, taskType, task
     });
   };
 };
+
+
 
 
 //fetch data
@@ -80,8 +83,23 @@ export const plantDelete = ({ uid }) => {
 };
 
 
+
 export const plantClear = () => {
     return ({ type: PLANT_CLEAR_SUCCESS });
+};
+
+
+
+export const plantGallery = () => {
+  const { currentUser } = firebase.auth();
+
+  return (dispatch) => {
+    // console.log("in PLANTS FETCH");
+    firebase.database().ref(`/users/${currentUser.uid}/plants`)
+    .on('value', snapshot => {
+      dispatch({ type: PLANTS_PHOTOS, payload: snapshot.val() });
+    })
+  };
 };
 
 //then hook action creator up to plantedit Component
