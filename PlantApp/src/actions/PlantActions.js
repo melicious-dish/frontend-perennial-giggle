@@ -8,7 +8,8 @@ import {
   PLANTS_FETCH_SUCCESS,
   PLANT_SAVE_SUCCESS,
   PLANT_CLEAR_SUCCESS,
-  PLANTS_PHOTOS
+  // PLANTS_PHOTOS,
+  TAKE_PHOTO
 } from './types';
 
 export const addPlant = ({ prop, value }) => {
@@ -17,7 +18,6 @@ export const addPlant = ({ prop, value }) => {
     payload: { prop, value }
   };
 };
-
 
 // create a path to our json data - use an arrow function to get past Thunk wanting to return a function
 // use firebase.auth to get uid
@@ -37,9 +37,6 @@ export const plantCreate = ({ genusSpecies, commonName, nickname, taskType, task
     });
   };
 };
-
-
-
 
 //fetch data
 // snapshot is an object that describes the data, call snapshot.val to get the list of actual data
@@ -82,23 +79,26 @@ export const plantDelete = ({ uid }) => {
   };
 };
 
-
-
 export const plantClear = () => {
     return ({ type: PLANT_CLEAR_SUCCESS });
 };
 
-
-
 export const plantGallery = () => {
-  const { currentUser } = firebase.auth();
+  // const { currentUser } = firebase.auth();
+  //
+  // return (dispatch) => {
+  //   // console.log("in PLANTS FETCH");
+  //   firebase.database().ref(`/users/${currentUser.uid}/plants`)
+  //   .on('value', snapshot => {
+  //     dispatch({ type: PLANTS_PHOTOS, payload: snapshot.val() });
+  //   })
+  // };
+};
 
-  return (dispatch) => {
-    // console.log("in PLANTS FETCH");
-    firebase.database().ref(`/users/${currentUser.uid}/plants`)
-    .on('value', snapshot => {
-      dispatch({ type: PLANTS_PHOTOS, payload: snapshot.val() });
-    })
+export const takePhoto = ({ prop, value }) => {
+  return {
+    type: TAKE_PHOTO,
+    payload: { prop, value }
   };
 };
 

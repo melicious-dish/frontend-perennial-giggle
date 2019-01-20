@@ -3,6 +3,7 @@ import { View, Text, Picker } from 'react-native';
 import { connect } from 'react-redux';
 import { addPlant } from '../actions';
 import { CardSection, Input, Button } from './common';
+import { Actions } from 'react-native-router-flux';
 
 class PlantForm extends Component {
   render() {
@@ -83,7 +84,7 @@ class PlantForm extends Component {
         </CardSection>
 
         <CardSection>
-          <Button >
+          <Button onUserPress={() => Actions.takePhoto()}>
           Add Photo
           </Button>
         </CardSection>

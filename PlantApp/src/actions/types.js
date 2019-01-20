@@ -10,4 +10,5 @@ export const PLANTS_FETCH_SUCCESS = 'plants_fetch_success';
 export const PLANT_SAVE_SUCCESS = 'plant_save_success';
 export const PLANT_CLEAR_SUCCESS = 'plant_clear_success';
 export const PLANTS_PHOTOS = 'plants_photos';
+export const TAKE_PHOTO = 'take_photo';
 // export const LOGOUT_USER = 'logout_user';

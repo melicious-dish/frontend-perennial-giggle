@@ -7,6 +7,7 @@ import PlantList from './Components/PlantList';
 import PlantCreate from './Components/PlantAdd';
 import PlantEdit from './Components/PlantEdit';
 import PlantGallery from './Components/PlantGallery';
+import Camera from './Components/Camera';
 
 const RouterComponent = () => {
   return (
@@ -32,10 +33,14 @@ const RouterComponent = () => {
           initial
           />
 
-
           <Scene key='plantCreate'
           component={PlantCreate}
           title='Create Plant'
+          />
+
+        <Scene key='takePhoto'
+          component={Camera}
+          title='Take Photo'
           />
 
           <Scene key="plantEdit"

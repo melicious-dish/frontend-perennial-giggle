@@ -33,8 +33,6 @@ class PlantCreate extends Component {
             Create
           </Button>
         </CardSection>
-
-
       </Card>
     );
   }
