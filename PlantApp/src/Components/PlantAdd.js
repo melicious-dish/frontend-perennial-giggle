@@ -38,7 +38,6 @@ class PlantCreate extends Component {
   }
 }
 
-
 const mapStateToProps = (state) => {
   const { genusSpecies, commonName, nickname, taskType, taskFrequency, taskInterval, photo } = state.plantForm;
 

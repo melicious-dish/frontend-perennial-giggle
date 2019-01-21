@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { RNCamera } from 'react-native-camera';
+import { Actions } from 'react-native-router-flux';
+import { takePhoto } from '../actions';
+import { connect } from 'react-redux';
 
 class Camera extends Component {
   render() {
@@ -30,6 +33,7 @@ class Camera extends Component {
     if (this.camera) {
       const options = { quality: 0.5, base64: true };
       const data = await this.camera.takePictureAsync(options);
+      this.props.takePhoto({ uid: this.props.uid, uri: data.uri })
       console.log(data.uri);
     }
   };
@@ -58,4 +62,10 @@ const styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('PlantApp', () => Camera);
-export default Camera;
+
+const mapStateToProps = (state) => {
+  const { uid } = state.plantForm;
+  return { uid };
+}
+
+export default connect(mapStateToProps, { takePhoto })(Camera);

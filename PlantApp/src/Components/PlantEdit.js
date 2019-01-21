@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { each } from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PlantForm from './PlantForm';
@@ -9,7 +9,7 @@ class PlantEdit extends Component {
   state = { showModal: false}
 
   componentDidMount() {
-    _.each(this.props.plant, (value, prop) => {
+    each(this.props.plant, (value, prop) => {
       this.props.addPlant({ prop, value });
     });
   }

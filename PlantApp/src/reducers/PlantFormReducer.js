@@ -2,7 +2,8 @@ import {
   ADD_PLANT,
   PLANT_CREATE,
   PLANT_SAVE_SUCCESS,
-  PLANT_CLEAR_SUCCESS
+  PLANT_CLEAR_SUCCESS,
+  TAKE_PHOTO,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -24,6 +25,8 @@ export default (state = INITIAL_STATE, action) => {
     case PLANT_SAVE_SUCCESS:
       return INITIAL_STATE;
     case PLANT_CLEAR_SUCCESS:
+      return INITIAL_STATE;
+    case TAKE_PHOTO:
       return INITIAL_STATE;
     default:
       return state;
