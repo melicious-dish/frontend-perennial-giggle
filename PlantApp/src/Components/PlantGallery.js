@@ -1,32 +1,47 @@
-import _ from 'lodash';
+import { map } from 'lodash';
 import React, { Component } from 'react';
-import { FlatList } from 'react-native';
-import { Text } from 'react-native';
+// import { FlatList } from 'react-native';
+import { Image, SectionList, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { Card, CardSection } from './common';
+import { CardSection, Card } from './common';
 import { plantsFetch } from '../actions';
-import PlantListItem from './PlantListItem';
+// import PlantListItem from './PlantListItem';
 
 class PlantGallery extends Component {
-  renderItem({ item }) {
-    return <PlantListItem plant={item} />;
-  }
+  renderItem = ({ item }) => (
+    <Image
+      key={item.id}
+      style={{ width: 100, height: 100 }}
+      source={{ uri: item.url }}
+    />
+  );
 
   render() {
-    // console.log(this.props);
+    console.log('in render');
+    console.log(this.props);
 
     return (
-      <FlatList
-        data={this.props.plants}
+      <SectionList
         renderItem={this.renderItem}
-        keyExtractor={item => item.uid}
+        renderSectionHeader={({ section: { title } }) => (
+          <Text style={{ fontSize: 18, padding: 10 }}>{title}</Text>
+        )}
+        sections={this.props.plants
+          .filter(plant => plant.plantImages)
+          .map(plant => ({
+            title: plant.nickname,
+            data: map(plant.plantImages, (url, id) => ({
+              id,
+              url,
+            })),
+          }))}
+        keyExtractor={item => item.id}
       />
     );
   }
 }
-
 const mapStateToProps = state => {
-  const plants = _.map(state.plants, (val, uid) => ({ ...val, uid }));
+  const plants = map(state.plants, (val, uid) => ({ ...val, uid }));
   return { plants };
 };
 

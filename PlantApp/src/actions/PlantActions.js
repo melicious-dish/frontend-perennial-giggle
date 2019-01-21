@@ -78,7 +78,7 @@ export const plantSave = ({
   taskType,
   taskFrequency,
   taskInterval,
-  photo,
+  plantImages,
   uid,
 }) => {
   const { currentUser } = firebase.auth();
@@ -94,7 +94,7 @@ export const plantSave = ({
         taskType,
         taskFrequency,
         taskInterval,
-        photo,
+        plantImages,
       })
       .then(() => {
         dispatch({ type: PLANT_SAVE_SUCCESS });

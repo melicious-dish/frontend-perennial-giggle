@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
-import { CardSection } from './common';
 import { Actions } from 'react-native-router-flux';
+import { CardSection } from './common';
 
 class PlantListItem extends Component {
   onRowPress() {
-    Actions.plantEdit( { plant: this.props.plant });
+    Actions.plantEdit({ plant: this.props.plant });
   }
+
   render() {
     const { nickname, genusSpecies } = this.props.plant;
 
@@ -15,10 +16,9 @@ class PlantListItem extends Component {
         <View>
           <CardSection>
             <Text style={styles.titleStyle}>
-              {nickname}{"\n"}
-              <Text style={styles.subtitleStyle}>
-                {genusSpecies}
-              </Text>
+              {nickname}
+              {'\n'}
+              <Text style={styles.subtitleStyle}>{genusSpecies}</Text>
             </Text>
           </CardSection>
         </View>
@@ -30,11 +30,11 @@ class PlantListItem extends Component {
 const styles = {
   titleStyle: {
     fontSize: 18,
-    paddingLeft: 15
+    paddingLeft: 15,
   },
   subtitleStyle: {
     fontSize: 14,
-    paddingLeft: 15
-  }
-}
+    paddingLeft: 15,
+  },
+};
 export default PlantListItem;

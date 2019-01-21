@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import { Actions } from 'react-native-router-flux';
-import { takePhoto } from '../actions';
 import { connect } from 'react-redux';
+import { takePhoto } from '../actions';
 
 class Camera extends Component {
   render() {
@@ -15,13 +21,17 @@ class Camera extends Component {
           }}
           style={styles.preview}
           type={RNCamera.Constants.Type.back}
-
-          permissionDialogTitle={'Permission to use camera'}
-          permissionDialogMessage={'We need your permission to use your camera phone'}
+          permissionDialogTitle="Permission to use camera"
+          permissionDialogMessage="We need your permission to use your camera phone"
           captureAudio={false}
         />
-        <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
-          <TouchableOpacity onPress={this.takePicture.bind(this)} style={styles.capture}>
+        <View
+          style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}
+        >
+          <TouchableOpacity
+            onPress={this.takePicture.bind(this)}
+            style={styles.capture}
+          >
             <Text style={{ fontSize: 12 }}> SNAP YO PLANT</Text>
           </TouchableOpacity>
         </View>
@@ -31,9 +41,9 @@ class Camera extends Component {
 
   takePicture = async function() {
     if (this.camera) {
-      const options = { quality: 0.5, base64: true };
+      const options = { quality: 0.25, base64: false };
       const data = await this.camera.takePictureAsync(options);
-      this.props.takePhoto({ uid: this.props.uid, uri: data.uri })
+      this.props.takePhoto({ uid: this.props.uid, uri: data.uri });
       console.log(data.uri);
     }
   };
@@ -63,9 +73,12 @@ const styles = StyleSheet.create({
 
 AppRegistry.registerComponent('PlantApp', () => Camera);
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const { uid } = state.plantForm;
   return { uid };
-}
+};
 
-export default connect(mapStateToProps, { takePhoto })(Camera);
+export default connect(
+  mapStateToProps,
+  { takePhoto }
+)(Camera);
