@@ -3,7 +3,7 @@ import { Text } from 'react-native';
 import { connect } from 'react-redux';
 import { addPlant, plantCreate, plantClear } from '../actions';
 import { Card, CardSection, Button } from './common';
-import PlantForm from './PlantForm';
+import PlantForm from './PlantForm.jsx';
 
 // Plant create Form
 // import { Image } from 'react-native';
@@ -12,38 +12,72 @@ import PlantForm from './PlantForm';
 // import { ImagePicker } from 'react-native-image-picker';
 // import { ImageResizer } from 'react-native-image-resizer';
 
-
 class PlantCreate extends Component {
   componentDidMount() {
     this.props.plantClear();
-}
+  }
 
   onButtonPress() {
-    const { genusSpecies, commonName, nickname, taskType, taskFrequency, taskInterval, photo } = this.props;
+    const {
+      genusSpecies,
+      commonName,
+      nickname,
+      taskType,
+      taskFrequency,
+      taskInterval,
+      photo,
+    } = this.props;
 
-    this.props.plantCreate({ genusSpecies, commonName, nickname, taskType, taskFrequency, taskInterval, photo });
+    this.props.plantCreate({
+      genusSpecies,
+      commonName,
+      nickname,
+      taskType,
+      taskFrequency,
+      taskInterval,
+      photo,
+    });
   }
 
   render() {
     return (
       <Card>
-          <PlantForm { ...this.props }/>
+        <PlantForm {...this.props} />
         <CardSection>
-          <Button onUserPress={this.onButtonPress.bind(this)}>
-            Create
-          </Button>
+          <Button onUserPress={this.onButtonPress.bind(this)}>Create</Button>
         </CardSection>
       </Card>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  const { genusSpecies, commonName, nickname, taskType, taskFrequency, taskInterval, photo } = state.plantForm;
+const mapStateToProps = state => {
+  const {
+    genusSpecies,
+    commonName,
+    nickname,
+    taskType,
+    taskFrequency,
+    taskInterval,
+    photo,
+  } = state.plantForm;
 
-  return { genusSpecies, commonName, nickname, taskType, taskFrequency, taskInterval, photo };
-}
+  return {
+    genusSpecies,
+    commonName,
+    nickname,
+    taskType,
+    taskFrequency,
+    taskInterval,
+    photo,
+  };
+};
 
-export default connect(mapStateToProps, {
-  addPlant, plantCreate, plantClear
-}) (PlantCreate);
+export default connect(
+  mapStateToProps,
+  {
+    addPlant,
+    plantCreate,
+    plantClear,
+  }
+)(PlantCreate);
