@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { Text, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { addPlant, plantCreate, plantClear } from '../actions';
 import { Card, CardSection, Button } from './common';
@@ -25,7 +25,7 @@ class PlantCreate extends Component {
       taskType,
       taskFrequency,
       taskInterval,
-      photo,
+      plantImages,
     } = this.props;
 
     this.props.plantCreate({
@@ -35,18 +35,20 @@ class PlantCreate extends Component {
       taskType,
       taskFrequency,
       taskInterval,
-      photo,
+      plantImages,
     });
   }
 
   render() {
     return (
-      <Card>
-        <PlantForm {...this.props} />
-        <CardSection>
-          <Button onUserPress={this.onButtonPress.bind(this)}>Create</Button>
-        </CardSection>
-      </Card>
+      <ScrollView>
+        <Card>
+          <PlantForm {...this.props} />
+          <CardSection>
+            <Button onUserPress={this.onButtonPress.bind(this)}>Create</Button>
+          </CardSection>
+        </Card>
+      </ScrollView>
     );
   }
 }
@@ -59,7 +61,7 @@ const mapStateToProps = state => {
     taskType,
     taskFrequency,
     taskInterval,
-    photo,
+    plantImages,
   } = state.plantForm;
 
   return {
@@ -69,7 +71,7 @@ const mapStateToProps = state => {
     taskType,
     taskFrequency,
     taskInterval,
-    photo,
+    plantImages,
   };
 };
 

@@ -1,26 +1,31 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
-import { emailChanged, passwordChanged, loginUser, logoutUser } from '../actions'
 import { Text, View } from 'react-native';
+import {
+  emailChanged,
+  passwordChanged,
+  loginUser,
+  logoutUser,
+} from '../actions';
 // import firebase from 'firebase';
 import { Button, Card, CardSection, Input, Spinner } from './common';
-
 
 class LoginForm extends Component {
   componentDidMount() {
     firebase.auth().onAuthStateChanged(currentUser => {
       if (currentUser) {
-        Actions.main()
+        Actions.main();
       }
-    })
+    });
   }
 
   onEmailChange(text) {
     this.props.emailChanged(text);
   }
-// call to the action creator
+
+  // call to the action creator
   onPasswordChange(text) {
     this.props.passwordChanged(text);
   }
@@ -33,70 +38,23 @@ class LoginForm extends Component {
 
   renderButton() {
     if (this.props.loading) {
-      return <Spinner size='large' />;
+      return <Spinner size="large" />;
     }
 
-    return (
-      <Button onUserPress={this.onButtonPress.bind(this)}>
-        Login
-      </Button>
-    );
+    return <Button onUserPress={this.onButtonPress.bind(this)}>Login</Button>;
   }
 
   renderError() {
     if (this.props.error) {
       return (
         <View style={{ backgroundColor: 'white' }}>
-          <Text style={styles.errorTextStyle}>
-            {this.props.error}
-          </Text>
+          <Text style={styles.errorTextStyle}>{this.props.error}</Text>
         </View>
-      )
+      );
     }
   }
 
-  // onButtonPress() {
-  //   const { email, password } = this.state;
-
-    // this.setState({ error: '', loading: true });
-    //
-    // firebase.auth().signInWithEmailAndPassword(email, password)
-    //   .then(this.onLoginSuccess.bind(this))
-    //   .catch(() => {
-    //     firebase.auth().createUserWithEmailAndPassword(email, password)
-    //       .then(this.onLoginSuccess.bind(this))
-    //       .catch(this.onLoginFail.bind(this));
-      // });
-  // }
-
-  // onLoginFail() {
-  //   this.setState({ error: 'Invalid email or password', loading: false });
-  // }
-  //
-  // onLoginSuccess() {
-  //   this.setState({
-  //     email: '',
-  //     password: '',
-  //     loading: false,
-  //     error: ''
-  //   });
-  // }
-
-  // renderButton() {
-  //   if (this.state.loading) {
-  //     return <Spinner size="small"/>
-  //   }
-  //   return (
-  //     <Button onUserPress={this.onButtonPress.bind(this)}>
-  //       Log In
-  //     </Button>
-  //   );
-  // }
-
-
-
   render() {
-
     return (
       <Card>
         <CardSection>
@@ -105,7 +63,7 @@ class LoginForm extends Component {
             label="Email"
             onChangeText={this.onEmailChange.bind(this)}
             value={this.props.email}
-            />
+          />
         </CardSection>
 
         <CardSection>
@@ -118,33 +76,33 @@ class LoginForm extends Component {
           />
         </CardSection>
 
-        <Text style={styles.errorTextStyle}>
-          {this.props.error}
-        </Text>
+        <Text style={styles.errorTextStyle}>{this.props.error}</Text>
 
-        <CardSection>
-          {this.renderButton()}
-        </CardSection>
-
+        <CardSection>{this.renderButton()}</CardSection>
       </Card>
     );
   }
 }
-//{use bind to use it in the future}
+// {use bind to use it in the future}
 
 const styles = {
   errorTextStyle: {
     fontSize: 20,
     alignSelf: 'center',
     color: 'red',
-
-  }
-}
+  },
+};
 const mapStateToProps = ({ auth }) => {
-  const { email, password, error, loading } = auth
+  const { email, password, error, loading } = auth;
   return { email, password, error, loading };
 };
 
-export default connect(mapStateToProps, {
-  emailChanged, passwordChanged, loginUser, logoutUser
-})(LoginForm);
+export default connect(
+  mapStateToProps,
+  {
+    emailChanged,
+    passwordChanged,
+    loginUser,
+    logoutUser,
+  }
+)(LoginForm);

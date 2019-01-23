@@ -1,6 +1,5 @@
 // import { SELECT_LIBRARY } from '../actions/types';
 
-
 // always called w 2 arguements : CURRENT state it has produced and action
 
 // reducers are run repeatedly (with store.dispatch(action)) so initial state will be updated so can add if/else

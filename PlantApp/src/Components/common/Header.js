@@ -1,11 +1,7 @@
-// import libries for making a component
 import React from 'react';
 import { Text, View } from 'react-native';
 
-
-// make a component
-
-const Header = (props) => {
+const Header = props => {
   const { textStyle, viewStyle } = styles;
 
   return (
@@ -26,12 +22,11 @@ const styles = {
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     elevation: 2,
-    position: 'relative'
+    position: 'relative',
   },
   textStyle: {
-    fontSize: 20
-  }
+    fontSize: 20,
+  },
 };
 
-// make the component available to other parts of the app
-export { Header }
+export { Header };

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { Avatar } from 'react-native-elements';
 import { CardSection } from './common';
 
 class PlantListItem extends Component {
@@ -15,6 +16,16 @@ class PlantListItem extends Component {
       <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
         <View>
           <CardSection>
+            <Avatar
+              small
+              rounded
+              source={{
+                uri:
+                  'https://www.niehs.nih.gov/health/assets/images/aloe_leaf.jpg',
+              }}
+              onPress={() => console.log('Works!')}
+              activeOpacity={0.7}
+            />
             <Text style={styles.titleStyle}>
               {nickname}
               {'\n'}

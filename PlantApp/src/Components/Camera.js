@@ -41,7 +41,7 @@ class Camera extends Component {
 
   takePicture = async function() {
     if (this.camera) {
-      const options = { quality: 0.25, base64: false };
+      const options = { quality: 0.25, base64: true };
       const data = await this.camera.takePictureAsync(options);
       this.props.takePhoto({ uid: this.props.uid, uri: data.uri });
       console.log(data.uri);

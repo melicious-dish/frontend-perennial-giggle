@@ -31,7 +31,7 @@ export const plantCreate = ({
   taskType,
   taskFrequency,
   taskInterval,
-  photo,
+  plantImages = null,
 }) => {
   const { currentUser } = firebase.auth();
 
@@ -46,7 +46,7 @@ export const plantCreate = ({
         taskType,
         taskFrequency,
         taskInterval,
-        photo,
+        plantImages,
       })
       .then(() => {
         dispatch({ type: PLANT_CREATE });
