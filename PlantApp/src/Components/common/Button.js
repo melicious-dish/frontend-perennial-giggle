@@ -19,6 +19,7 @@ const styles = {
     fontWeight: '600',
     paddingTop: 10,
     paddingBottom: 10,
+    fontFamily: 'Futura-Medium',
   },
   buttonStyle: {
     flex: 1,

@@ -122,6 +122,7 @@ const styles = {
   pickerLabelStyle: {
     fontSize: 14,
     justifyContent: 'center',
+    fontFamily: 'Futura-Medium',
   },
 };
 
