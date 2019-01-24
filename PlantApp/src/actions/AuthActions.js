@@ -7,9 +7,11 @@ import {
   PASSWORD_CHANGED,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
-  LOGIN_USER
+  LOGIN_USER,
+  LOGOUT_USER,
+  LOGOUT_USER_FAIL,
+  LOGOUT_USER_SUCCESS,
 } from './types';
-
 
 // plain js object that tells the reducer how to change data.
 
@@ -20,51 +22,72 @@ import {
 
 // next update the reducer to tell it how to handle this action
 
-export const selectedLibrary = (libraryId) => {
-  return {
-    type: SELECT_LIBRARY,
-    payload: libraryId
-  };
-};
+export const selectedLibrary = libraryId => ({
+  type: SELECT_LIBRARY,
+  payload: libraryId,
+});
 
 // login
-export const emailChanged = (text) => {
-  return {
-    type: EMAIL_CHANGED,
-    payload: text
-  };
-};
+export const emailChanged = text => ({
+  type: EMAIL_CHANGED,
+  payload: text,
+});
 
-export const passwordChanged = (text) => {
-  return {
-    type: PASSWORD_CHANGED,
-    payload: text
-  };
-};
+export const passwordChanged = text => ({
+  type: PASSWORD_CHANGED,
+  payload: text,
+});
 
-export const loginUser = ({ email, password }) => {
-  return (dispatch) => {
-    dispatch({ type: LOGIN_USER });
+export const loginUser = ({ email, password }) => dispatch => {
+  dispatch({ type: LOGIN_USER });
 
-    firebase.auth().signInWithEmailAndPassword(email, password)
+  firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
     .then(user => loginUserSuccess(dispatch, user))
     .catch(() => {
-      firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(user => loginUserSuccess(dispatch, user))
-      .catch(() => loginUserFail(dispatch))
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(user => loginUserSuccess(dispatch, user))
+        .catch(error => loginUserFail(dispatch, error));
     });
-  };
 };
 
-const loginUserFail = (dispatch) => {
+const loginUserFail = (dispatch, error) => {
   dispatch({ type: LOGIN_USER_FAIL });
+  console.error(error);
 };
 
 const loginUserSuccess = (dispatch, user) => {
   dispatch({
     type: LOGIN_USER_SUCCESS,
-    payload: user
+    payload: user,
   });
 
-  Actions.main();
+  Actions.main({ type: 'replace' });
+};
+
+export const logoutUser = () => dispatch => {
+  dispatch({ type: LOGOUT_USER });
+  firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      logoutUserSuccess(dispatch);
+    })
+    .catch(error => logoutUserFail(dispatch, error));
+};
+
+const logoutUserSuccess = dispatch => {
+  dispatch({
+    type: LOGOUT_USER_SUCCESS,
+  });
+
+  Actions.auth({ type: 'replace' });
+};
+
+const logoutUserFail = (dispatch, error) => {
+  dispatch({ type: LOGOUT_USER_FAIL });
+  console.error(error);
 };

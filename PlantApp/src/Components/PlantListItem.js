@@ -3,6 +3,7 @@ import { Text, TouchableWithoutFeedback, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Avatar } from 'react-native-elements';
 import { CardSection } from './common';
+// import from '/.img';
 
 class PlantListItem extends Component {
   onRowPress() {
@@ -19,10 +20,7 @@ class PlantListItem extends Component {
             <Avatar
               small
               rounded
-              source={{
-                uri:
-                  'https://www.niehs.nih.gov/health/assets/images/aloe_leaf.jpg',
-              }}
+              source={require('../img/cactus_white.png')}
               onPress={() => console.log('Works!')}
               activeOpacity={0.7}
             />

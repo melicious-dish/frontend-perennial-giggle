@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, View, TouchableOpacity, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { plantsFetch } from '../actions';
+import { plantsFetch, logoutUser } from '../actions';
 import PlantListItem from './PlantListItem';
 
 class PlantList extends Component {
@@ -17,11 +17,21 @@ class PlantList extends Component {
   render() {
     // console.log(this.props);
     return (
-      <FlatList
-        data={this.props.plants}
-        renderItem={this.renderItem}
-        keyExtractor={item => item.uid}
-      />
+      <View style={{ flex: 1 }}>
+        <FlatList
+          data={this.props.plants}
+          renderItem={this.renderItem}
+          keyExtractor={item => item.uid}
+        />
+        <TouchableOpacity
+          style={styles.buttonStyle}
+          onPress={() => {
+            this.props.logoutUser();
+          }}
+        >
+          <Text style={styles.textStyle}>Log Out</Text>
+        </TouchableOpacity>
+      </View>
     );
   }
 }
@@ -30,7 +40,26 @@ const mapStateToProps = state => {
   const plants = _.map(state.plants, (val, uid) => ({ ...val, uid }));
   return { plants };
 };
+
+const styles = {
+  textStyle: {
+    alignSelf: 'center',
+    color: '#446529',
+    fontSize: 16,
+    fontWeight: '600',
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
+  buttonStyle: {
+    alignSelf: 'stretch',
+    borderRadius: 20,
+    marginLeft: 5,
+    marginRight: 5,
+    marginBottom: 30,
+  },
+};
+
 export default connect(
   mapStateToProps,
-  { plantsFetch }
+  { plantsFetch, logoutUser }
 )(PlantList);

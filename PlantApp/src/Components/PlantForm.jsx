@@ -67,7 +67,6 @@ class PlantForm extends Component {
         </CardSection>
 
         <CardSection style={{ flexDirection: 'row' }}>
-          <Text style={styles.pickerLabelStyle}>Add A Task</Text>
           <Picker
             selectedValue={this.props.taskType}
             style={{ flex: 1 }}

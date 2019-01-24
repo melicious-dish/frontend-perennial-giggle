@@ -13,14 +13,6 @@ import {
 import { Button, Card, CardSection, Input, Spinner } from './common';
 
 class LoginForm extends Component {
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged(currentUser => {
-      if (currentUser) {
-        Actions.main();
-      }
-    });
-  }
-
   onEmailChange(text) {
     this.props.emailChanged(text);
   }

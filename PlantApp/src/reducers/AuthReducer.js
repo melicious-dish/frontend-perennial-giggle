@@ -4,8 +4,8 @@ import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
   LOGIN_USER,
-  // LOGOUT_USER
- } from '../actions/types';
+  LOGOUT_USER,
+} from '../actions/types';
 
 // can never return undefined from a reducer, need a default state
 // use { ...state } to create a new object, otherwise redux won't know there's a state change.
@@ -14,8 +14,8 @@ const INITIAL_STATE = {
   password: '',
   user: null,
   error: '',
-  loading: false
- };
+  loading: false,
+};
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -24,13 +24,19 @@ export default (state = INITIAL_STATE, action) => {
     case PASSWORD_CHANGED:
       return { ...state, password: action.payload };
     case LOGIN_USER:
-      return { ...state, loading: true, error: '' }
+      return { ...state, loading: true, error: '' };
     case LOGIN_USER_SUCCESS:
       return { ...state, ...INITIAL_STATE, user: action.payload };
     case LOGIN_USER_FAIL:
-      return {...state, error: 'Invalid email or password.', password: '', loading: false}
+      return {
+        ...state,
+        error: 'Invalid email or password.',
+        password: '',
+        loading: false,
+      };
+    case LOGOUT_USER:
+      return { ...state, ...INITIAL_STATE };
     default:
       return state;
-
   }
 };

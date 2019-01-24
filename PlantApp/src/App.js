@@ -4,13 +4,17 @@ import firebase from 'firebase';
 import ReduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
-// import SplashScreen from 'react-native-splash-screen;';
+import SplashScreen from 'react-native-splash-screen';
 import { Button } from './Components/common';
 import LoginForm from './Components/LoginForm';
 import reducers from './reducers';
 import Router from './Router';
 
 class App extends Component {
+  componentDidMount() {
+    SplashScreen.hide();
+  }
+
   async UNSAFE_componentWillMount() {
     const config = {
       apiKey: 'AIzaSyCFT7sYB65HbuFRuyFz9mmloonV4XHwKf8',
@@ -23,6 +27,7 @@ class App extends Component {
     // SplashScreen.hide();
     await firebase.initializeApp(config);
   }
+
   // Provider translates state in the store for React to use the Redux
   // connects all the connect tags
 
@@ -64,6 +69,7 @@ const styles = {
   headerStyle: {
     marginTop: 20,
     fontSize: 25,
+    color: '#f5f7f3',
     alignSelf: 'center',
     backgroundColor: '#A9DFBF',
     borderRadius: 5,

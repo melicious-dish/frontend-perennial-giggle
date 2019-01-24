@@ -9,5 +9,6 @@ module.exports = {
   rules: {
     'react/prefer-stateless-function': 'off',
     'react/destructuring-assignment': 'off',
+    'react/jsx-filename-extension': 'off',
   },
 };

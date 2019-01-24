@@ -48,21 +48,23 @@ const styles = {
   containerStyle: {
     justifyContent: 'flex-end',
     padding: 5,
-    backgroundColor: '#f1f0de',
+    backgroundColor: '#f5f7f3',
   },
   contentStyle: {
-    borderRadius: 10,
     width: 100,
     height: 100,
+    borderRadius: 20,
   },
   textStyle: {
     flex: 1,
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: '600',
     alignItems: 'center',
-    backgroundColor: '#017f8d',
-    color: 'white',
+    backgroundColor: '#f5f7f3',
+    borderColor: '#446429',
+    color: '#446429',
     padding: 5,
+    borderRadius: 20,
   },
 };
 const mapStateToProps = state => {
