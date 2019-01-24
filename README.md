@@ -3,7 +3,7 @@
 ### Motivation ###
 Taking care of plants is hard. How much water do they need? What kind of fertilizer is best for this varietal? How much has my garden grown since I started it? This was the motivation behind this project -- to build an app that will help the user care for their plants and see their garden's progress over time. The app will eventually notify the user when the plants need care (watering schedule, repotting, etc). There will also be a feature to compile photos the user has taken of the plants and create a timelapse video of the images to see the progress over time.
 
-![Alt text](/path/to/img.jpg)
+![Alt text](/src/img/loadingscreen.png)
 
 ### Tech/framework used ###
 React Native
