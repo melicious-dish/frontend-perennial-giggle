@@ -155,7 +155,9 @@ export const takePhoto = ({ uid, uri }) => {
       xhr.send(null); // no initial data
     });
 
-    const snapshot = await imageRef.put(blob);
+    const snapshot = await imageRef.put(blob, {
+      cacheControl: 'public,max-age=31536000',
+    });
     const remoteURL = await snapshot.ref.getDownloadURL();
 
     blob.close();

@@ -13,6 +13,7 @@ const INITIAL_STATE = {
   taskType: 'water',
   taskFrequency: '1',
   taskInterval: 'day',
+  plantImages: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
